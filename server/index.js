@@ -1,7 +1,10 @@
 // index.js
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import { getNotes, getNote, createNote, updateNote, deleteNote } from "./db.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
@@ -10,8 +13,10 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-app.get("/", (req, res) => {
-  res.send("Hello from Express!");
+app.get("/", async (req, res) => {
+  let notes = await getNotes();
+  res.send(notes);
+  // res.send("Hello from Express!");
 });
 
 const port = process.env.PORT || 5000;
