@@ -46,7 +46,7 @@ export async function createNote(title, contents) {
         VALUES (?, ?)`,
     [title, contents]
   );
-  return getNote(res.insertId);
+  return getNotes();
 }
 
 export async function updateNote(id, title, contents) {
@@ -56,7 +56,7 @@ export async function updateNote(id, title, contents) {
         WHERE id = ?`,
     [title, contents, id]
   );
-  return getNote(res.insertId);
+  return getNotes();
 }
 
 export async function deleteNote(id) {
@@ -65,7 +65,7 @@ export async function deleteNote(id) {
         WHERE ${process.env.MYSQL_T_NOTES}.id = ?`,
     [id]
   );
-  return getNote(res.insertId);
+  return getNotes();
 }
 
 // const insert = await createNote('5 note','the 55555 note is not a fiver')
